@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { STATUS } from './utils/constants';
 import { format as formatDate, parseISO } from 'date-fns';
 
-import './App.css';
+import styles from './App.module.scss';
 import BillCard, { BillCardInterface } from './components/BillCard/BillCard';
 
 interface BillsData {
@@ -44,6 +44,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className={styles.Title}>Your Bills</h1>
       {viewableBillsData?.map((bill: BillCardInterface, index: any) => (
         <BillCard
           key={index}

@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { format as formatDate, parseISO } from 'date-fns';
+import BillModal from '../BillModal/BillModal';
 
 import styles from './BillCard.module.scss';
 
@@ -17,12 +15,18 @@ export interface BillCardInterface {
 }
 
 const BillCard: React.FC<BillCardInterface> = ({ thumbnail, amount, date, status, title }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = (): void => setOpen(true);
+
+  const handleClose = (): void => setOpen(false);
+
   return (
     <div className={styles.BillCardContainer}>
       <Card className={styles.BillCard}>
         <CardContent className={styles.BillCardContent}>
           <div>
-            <img className={styles.BillThumbnail} src={thumbnail} alt="bill" />
+            <img className={styles.BillThumbnail} src={thumbnail} alt="bill" onClick={handleClickOpen} />
             <Typography sx={{ fontSize: 14 }} color="text.secondary" className={styles.BillDate}>
               {date}
             </Typography>
@@ -36,10 +40,15 @@ const BillCard: React.FC<BillCardInterface> = ({ thumbnail, amount, date, status
             <Typography className={styles.BillStatus}>{status}</Typography>
           </div>
         </CardContent>
-        {/* <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions> */}
       </Card>
+      {open ? (
+        <BillModal
+          title={title.length > 15 ? title.slice(0, 15) + '...' : title}
+          open={open}
+          onClose={handleClose}
+          thumbnail={thumbnail}
+        />
+      ) : null}
     </div>
   );
 };
