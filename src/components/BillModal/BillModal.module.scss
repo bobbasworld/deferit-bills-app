@@ -13,7 +13,9 @@
 }
 
 .BillModalImage {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
+    @media (min-width: 767px) {
+        width: 100%;
+        height: 100%;
+    }
 }
