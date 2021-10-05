@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { format as formatDate, parseISO } from 'date-fns';
 import { STATUS } from './utils/constants';
+import { format as formatDate, parseISO } from 'date-fns';
 
 import './App.css';
 import BillCard, { BillCardInterface } from './components/BillCard/BillCard';
@@ -29,13 +29,14 @@ function App() {
   }, []);
 
   console.log('billsData: ', billsData);
-  // @ts-ignore
+
   const viewableBillsData = billsData
     ?.map((bill) => ({
-      thumbnail: 'https://via.placeholder.com/150/92c952',
+      thumbnail: 'https://gccontent.blob.core.windows.net/gccontent/blogs/legacy/c1/2015/09/bill.png',
       amount: bill.userId,
-      date: new Date(),
+      date: formatDate(parseISO(new Date().toISOString()), 'PP'),
       status: STATUS.PAID,
+      title: bill.title,
     }))
     .slice(0, 10);
 
@@ -44,7 +45,14 @@ function App() {
   return (
     <div className="App">
       {viewableBillsData?.map((bill: BillCardInterface, index: any) => (
-        <BillCard key={index} thumbnail={bill.thumbnail} amount={bill.amount} date={bill.date} status={bill.status} />
+        <BillCard
+          key={index}
+          thumbnail={bill.thumbnail}
+          title={bill.title}
+          amount={bill.amount}
+          date={bill.date}
+          status={bill.status}
+        />
       ))}
     </div>
   );

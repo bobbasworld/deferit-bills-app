@@ -2,15 +2,75 @@
 
 .BillCardContainer {
     padding: 20px;
+    font-family: 'Hind Vadodara' 'sans-serif';
 }
 
 .BillCard {
-    width: 40vw;
+    display: flex;
+    width: 80vw;
     margin: 0 auto;
-    text-align: start;
+    text-align: justify;
     border-radius: 20px;
 
     &:hover {
         box-shadow: 3px 5px #dddddd;
     }
+
+    @media (min-width: 767px) {
+        width: 30vw;
+    }
+
+}
+
+.BillCardContent {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    margin: 0 auto;
+
+    @media (min-width: 972px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.BillThumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: 30%;
+}
+
+.BillDate {
+    font-size: 12px;
+    color: $lightGray;
+    font-weight: 500;
+
+}
+
+.BillTitle {
+    color: $darkGray;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.BillAmount {
+    font-size: 16px;
+    color: $primaryPurple;
+    font-weight: 800;
+}
+
+.BillDescription {
+    font-size: 14px;
+    font-weight: 500;
+    color: $lightGray;
+}
+
+.BillStatus {
+    font-size: 14px;
+    background: $lightGreen;
+    border-radius: 9px;
+    width: auto;
+    max-width: 90px;
+    margin: 18px auto;
+    color: $darkGreen;
+    text-align: center;
 }
