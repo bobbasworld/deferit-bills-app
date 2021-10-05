@@ -1,0 +1,16 @@
+@import '../../styles//variables.scss';
+
+.BillCardContainer {
+    padding: 20px;
+}
+
+.BillCard {
+    width: 40vw;
+    margin: 0 auto;
+    text-align: start;
+    border-radius: 20px;
+
+    &:hover {
+        box-shadow: 3px 5px #dddddd;
+    }
+}
