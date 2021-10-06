@@ -7,7 +7,7 @@ import { STATUS } from './utils/constants';
 import styles from './App.module.scss';
 import BillCard, { BillCardInterface } from './components/BillCard/BillCard';
 
-interface BillsData {
+export interface BillsDataInterface {
   body: string;
   id: number;
   title: string;
@@ -15,7 +15,7 @@ interface BillsData {
 }
 
 function App() {
-  const [billsData, setBillsData] = useState<BillsData[]>([]);
+  const [billsData, setBillsData] = useState<BillsDataInterface[]>([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -36,18 +36,19 @@ function App() {
     [loading],
   );
 
-  const fetchBillsData = (pageNum: number): void => {
+  const fetchBillsData = (pageNum: number, cancelSource: any): void => {
     setLoading(true);
-    axios
-      .get(`http://jsonplaceholder.typicode.com/posts?_page=${pageNum}&_limit=10`)
+    axios({
+      method: 'GET',
+      url: `http://jsonplaceholder.typicode.com/posts?_page=${pageNum}&_limit=10`,
+      cancelToken: cancelSource.token,
+    })
       .then((response) => {
-        // eslint-disable-next-line arrow-body-style
-        setBillsData((prevData) => {
-          return [...prevData, ...response.data];
-        });
+        setBillsData((prevData) => [...prevData, ...response.data]);
         setLoading(false);
       })
       .catch((e) => {
+        if (axios.isCancel(e)) return;
         // eslint-disable-next-line no-console
         console.log(e);
         setError(true);
@@ -56,7 +57,10 @@ function App() {
 
   useEffect(() => {
     if (billsData.length === 110) return;
-    fetchBillsData(page);
+    const source = axios.CancelToken.source();
+    fetchBillsData(page, source);
+    // eslint-disable-next-line consistent-return
+    return () => source.cancel();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
