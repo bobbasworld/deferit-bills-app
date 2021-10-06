@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { STATUS } from './utils/constants';
+import CircularProgress from '@mui/material/CircularProgress';
 import { format as formatDate, parseISO } from 'date-fns';
+import { STATUS } from './utils/constants';
 
 import styles from './App.module.scss';
 import BillCard, { BillCardInterface } from './components/BillCard/BillCard';
-import CircularProgress from '@mui/material/CircularProgress';
 
 interface BillsData {
   body: string;
@@ -36,17 +36,19 @@ function App() {
     [loading],
   );
 
-  const fetchBillsData = (page: number): void => {
+  const fetchBillsData = (pageNum: number): void => {
     setLoading(true);
     axios
-      .get(`http://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=10`)
+      .get(`http://jsonplaceholder.typicode.com/posts?_page=${pageNum}&_limit=10`)
       .then((response) => {
+        // eslint-disable-next-line arrow-body-style
         setBillsData((prevData) => {
           return [...prevData, ...response.data];
         });
         setLoading(false);
       })
       .catch((e) => {
+        // eslint-disable-next-line no-console
         console.log(e);
         setError(true);
       });
@@ -58,8 +60,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  console.log('billsData: ', billsData);
-
   const viewableBillsData = billsData?.map((bill) => ({
     thumbnail: 'https://gccontent.blob.core.windows.net/gccontent/blogs/legacy/c1/2015/09/bill.png',
     amount: bill.userId,
@@ -67,8 +67,6 @@ function App() {
     status: STATUS.PAID,
     title: bill.title,
   }));
-
-  console.log('viewableBillData: ', viewableBillsData);
 
   return (
     <div className="App">
@@ -86,18 +84,17 @@ function App() {
               />
             </div>
           );
-        } else {
-          return (
-            <BillCard
-              key={index}
-              thumbnail={bill.thumbnail}
-              title={bill.title}
-              amount={bill.amount}
-              date={bill.date}
-              status={bill.status}
-            />
-          );
         }
+        return (
+          <BillCard
+            key={index}
+            thumbnail={bill.thumbnail}
+            title={bill.title}
+            amount={bill.amount}
+            date={bill.date}
+            status={bill.status}
+          />
+        );
       })}
       {loading && <CircularProgress className={styles.CircularProgress} />}
       {error && <div>Error...</div>}

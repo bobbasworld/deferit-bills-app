@@ -5,6 +5,7 @@ interface StatusInterface {
   PAID: string;
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export const STATUS: StatusInterface = {
   PROCESSING: 'processing',
   SCHEDULED: 'scheduled',

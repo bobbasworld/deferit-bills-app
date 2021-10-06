@@ -11,15 +11,13 @@ export interface BillModalProps {
   thumbnail: string;
 }
 
-const BillModal: React.FC<BillModalProps> = ({ title, open, onClose, thumbnail }) => {
-  return (
-    <Dialog onClose={onClose} open={open} className={styles.BillModalContainer}>
-      <DialogTitle className={styles.BillModalTitle}>{title}</DialogTitle>
-      <div className={styles.BillImageContainer}>
-        <img className={styles.BillModalImage} src={thumbnail} alt="bill" />
-      </div>
-    </Dialog>
-  );
-};
+const BillModal: React.FC<BillModalProps> = ({ title, open, onClose, thumbnail }) => (
+  <Dialog onClose={onClose} open={open} className={styles.BillModalContainer}>
+    <DialogTitle className={styles.BillModalTitle}>{title}</DialogTitle>
+    <div className={styles.BillImageContainer}>
+      <img className={styles.BillModalImage} src={thumbnail} alt="bill" />
+    </div>
+  </Dialog>
+);
 
 export default BillModal;

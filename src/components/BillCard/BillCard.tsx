@@ -27,13 +27,14 @@ const BillCard: React.FC<BillCardInterface> = ({ thumbnail, amount, date, status
       <Card className={styles.BillCard}>
         <CardContent className={styles.BillCardContent}>
           <div>
+            {/* eslint-disable-next-line */}
             <img className={styles.BillThumbnail} src={thumbnail} alt="bill" onClick={handleClickOpen} />
             <Typography sx={{ fontSize: 14 }} color="text.secondary" className={styles.BillDate}>
               {date}
             </Typography>
             <Tooltip title="This the title of the bill." arrow>
               <Typography sx={{ mb: 1.5 }} className={styles.BillTitle}>
-                {title.length > 15 ? title.slice(0, 15) + '...' : title}
+                {title.length > 15 ? `${title.slice(0, 15)}...` : title}
               </Typography>
             </Tooltip>
           </div>
@@ -49,7 +50,7 @@ const BillCard: React.FC<BillCardInterface> = ({ thumbnail, amount, date, status
                       Processing: This bill is current, it can take approx 1-2 hours depending on the time of day.
                     </li>
                     <li>
-                      Scheduled: This bill is scheduled to be paid and will be paid on the due date. You're in good
+                      Scheduled: This bill is scheduled to be paid and will be paid on the due date. You&apos;re in good
                       hands!
                     </li>
                     <li>
@@ -69,7 +70,7 @@ const BillCard: React.FC<BillCardInterface> = ({ thumbnail, amount, date, status
       </Card>
       {open ? (
         <BillModal
-          title={title.length > 15 ? title.slice(0, 15) + '...' : title}
+          title={title.length > 15 ? `${title.slice(0, 15)}...` : title}
           open={open}
           onClose={handleClose}
           thumbnail={thumbnail}
