@@ -12,10 +12,6 @@ export interface BillModalProps {
 }
 
 const BillModal: React.FC<BillModalProps> = ({ title, open, onClose, thumbnail }) => {
-  const handleListItemClick = (value: string) => {
-    onClose(value);
-  };
-
   return (
     <Dialog onClose={onClose} open={open} className={styles.BillModalContainer}>
       <DialogTitle className={styles.BillModalTitle}>{title}</DialogTitle>

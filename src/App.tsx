@@ -55,6 +55,7 @@ function App() {
   useEffect(() => {
     if (billsData.length === 110) return;
     fetchBillsData(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   console.log('billsData: ', billsData);
