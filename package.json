@@ -28,7 +28,7 @@
     "eslint:check": "./node_modules/.bin/eslint . --config .eslintrc.js --ext .ts,.js,.tsx,.jsx --max-warnings=0",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

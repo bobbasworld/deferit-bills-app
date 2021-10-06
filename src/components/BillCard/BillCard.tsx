@@ -29,7 +29,7 @@ const BillCard: React.FC<BillCardInterface> = ({ thumbnail, amount, date, status
           <div>
             {/* eslint-disable-next-line */}
             <img className={styles.BillThumbnail} src={thumbnail} alt="bill" onClick={handleClickOpen} />
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" className={styles.BillDate}>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" className={styles.BillDate} data-testid="date">
               {date}
             </Typography>
             <Tooltip title="This the title of the bill." arrow>

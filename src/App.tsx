@@ -41,7 +41,7 @@ function App() {
     axios({
       method: 'GET',
       url: `http://jsonplaceholder.typicode.com/posts?_page=${pageNum}&_limit=10`,
-      cancelToken: cancelSource.token,
+      cancelToken: cancelSource?.token,
     })
       .then((response) => {
         setBillsData((prevData) => [...prevData, ...response.data]);

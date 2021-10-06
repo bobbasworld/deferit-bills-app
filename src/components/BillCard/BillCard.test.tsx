@@ -41,12 +41,12 @@ describe('BillCard Component', () => {
   });
 
   it('correctly shows a date', () => {
-    const date = screen.getByText('Oct 6, 2021');
+    const date = screen.getByTestId('date');
     expect(date).toBeInTheDocument();
   });
 
   it('correctly shows a date', () => {
-    const date = screen.getByText('Oct 6, 2021');
+    const date = screen.getByTestId('date');
     expect(date).toBeInTheDocument();
   });
 
